@@ -52,7 +52,7 @@ func (p *Plugin) FetchMetrics() (map[string]float64, error) {
 func (p *Plugin) GraphDefinition() map[string]mp.Graphs {
 	return map[string]mp.Graphs{
 		"memory.#": {
-			Label: "Memory",
+			Label: "Cgroups Memory",
 			Unit:  mp.UnitBytes,
 			Metrics: []mp.Metrics{
 				{Name: "limit", Label: "Limit"},
