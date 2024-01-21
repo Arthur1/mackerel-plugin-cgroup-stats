@@ -42,9 +42,11 @@ func (p *Plugin) FetchMetrics() (map[string]float64, error) {
 	if err != nil {
 		return nil, err
 	}
-	metrics := make(map[string]float64, 2)
+	metrics := make(map[string]float64, 4)
 	metrics[fmt.Sprintf("memory.%s.usage", p.metricKey)] = float64(stats.Memory.Usage)
 	metrics[fmt.Sprintf("memory.%s.limit", p.metricKey)] = float64(stats.Memory.UsageLimit)
+	metrics[fmt.Sprintf("swap.%s.usage", p.metricKey)] = float64(stats.Memory.SwapUsage)
+	metrics[fmt.Sprintf("swap.%s.limit", p.metricKey)] = float64(stats.Memory.SwapLimit)
 	// TODO: implements other metrics
 	return metrics, nil
 }
@@ -53,6 +55,14 @@ func (p *Plugin) GraphDefinition() map[string]mp.Graphs {
 	return map[string]mp.Graphs{
 		"memory.#": {
 			Label: "Cgroups Memory",
+			Unit:  mp.UnitBytes,
+			Metrics: []mp.Metrics{
+				{Name: "limit", Label: "Limit"},
+				{Name: "usage", Label: "Usage"},
+			},
+		},
+		"swap.#": {
+			Label: "Cgroups Memory Swap",
 			Unit:  mp.UnitBytes,
 			Metrics: []mp.Metrics{
 				{Name: "limit", Label: "Limit"},
