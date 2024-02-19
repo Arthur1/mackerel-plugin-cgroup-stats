@@ -17,6 +17,6 @@ require (
 require (
 	github.com/containerd/cgroups/v3 v3.0.3
 	github.com/mackerelio/golib v1.2.1 // indirect
-	github.com/opencontainers/runtime-spec v1.1.0
+	github.com/opencontainers/runtime-spec v1.2.0 // indirect
 	golang.org/x/text v0.3.7 // indirect
 )
